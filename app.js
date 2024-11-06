@@ -84,8 +84,9 @@ let generateQuestionnaire = () =>
             // Creo el radio button de la respuesta
             const answerRBtn = document.createElement("input");
             answerRBtn.type = "radio";
-            answerRBtn.name = `question_${index}`
+            answerRBtn.name = `question_${index}`;
             answerRBtn.value = i;
+            answerRBtn.class = "rbtnAnswer";
             answerLabel.appendChild(answerRBtn);
 
             // Creo el texto de la pregunta
@@ -98,7 +99,13 @@ let generateQuestionnaire = () =>
 
 let checkAnswers = () =>
 {
-    console.log("REVISANDO");
+    quests.forEach((quest, index) => {
+        const answers = document.querySelectorAll(`input[name=question_${index}]`);
+        const selectedAnswer = Array.from(answers).find(answer => answer.checked)?.value;
+
+        console.log(quest.isCorrectAnswer(Number(selectedAnswer)));
+        
+    });
 }
 
 let displayAlert = (event) =>
