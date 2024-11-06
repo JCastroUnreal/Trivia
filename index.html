@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- HITO 1 
+            - 1 sola pantalla
+            - 2 preguntas con 3 respuestas cada una
+            - 1 boton para responder y ver cual es la respuesta correcta
+            - no dice si aciertas o no, solo la respuesta correcta
+    -->
+    <div class="question-container">
+      <p>PREGUNTA 1</p>
+      <div class="answers-container">
+        <label>
+          <input
+            class="rbtnAnswer"
+            type="radio"
+            name="quest_1"
+            value="answer_1"
+          />
+          Respuesta 1
+        </label>
+        <label>
+          <input
+            class="rbtnAnswer"
+            type="radio"
+            name="quest_1"
+            value="answer_2"
+          />
+          Respuesta 2
+        </label>
+        <label>
+          <input
+            class="rbtnAnswer"
+            type="radio"
+            name="quest_1"
+            value="answer_3"
+          />
+          Respuesta 3
+        </label>
+        <label>
+          <input
+            class="rbtnAnswer"
+            type="radio"
+            name="quest_1"
+            value="answer_4"
+          />
+          Respuesta 4
+        </label>
+      </div>
+    </div>
+    <div class="question-container">
+      <p>PREGUNTA 2</p>
+      <div class="answers-container">
+        <label>
+          <input
+            class="rbtnAnswer"
+            type="radio"
+            name="quest_2"
+            value="answer_1"
+          />
+          Respuesta 1
+        </label>
+        <label>
+          <input
+            class="rbtnAnswer"
+            type="radio"
+            name="quest_2"
+            value="answer_2"
+          />
+          Respuesta 2
+        </label>
+        <label>
+          <input
+            class="rbtnAnswer"
+            type="radio"
+            name="quest_2"
+            value="answer_3"
+          />
+          Respuesta 3
+        </label>
+        <label>
+          <input
+            class="rbtnAnswer"
+            type="radio"
+            name="quest_2"
+            value="answer_4"
+          />
+          Respuesta 4
+        </label>
+      </div>
+    </div>
+
+    <button id="btnCheckAnswers" class="check-button">COMPROBAR</button>
+
+    <script src="app.js" defer></script>
+  </body>
+</html>
