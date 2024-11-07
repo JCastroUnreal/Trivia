@@ -1,10 +1,124 @@
+body, html {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    align-items: center;
+
+    height: 100vh;
+
+    background-color: rgb(12, 12, 12);
+    color: rgb(240, 240, 240);
+
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body button {
+
+}
+
+/* ESTILOS DE LA PANTALLA DE INICIO */
+.main-screen.fade-out {
+    opacity: 0;
+
+    transition: opacity 0.5s ease;
+}
+
+.main-title {
+    margin-top: 0px;
+
+    text-align: center;
+    font-size: 120px;
+}
+
+.main-input-name-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 20px;
+}
+.main-input-name-container input {
+    height: 70px;
+    width: 70%;
+
+    padding: 10px;
+
+    text-align: center;
+    font-size: 50px;
+    font-weight: bold;
+
+    text-overflow: ellipsis;
+}
+.main-input-name-container button {
+    background-color: wheat;
+
+    border: 3px, thin, rgb(255, 221, 147);
+    border-radius: 30px;
+
+    height: 65px;
+    width: 150px;
+
+    font-size: 30px;
+    font-weight: bold;
+
+    transition: background-color 0.3s;
+    transition: transform 0.5s;
+}
+.main-input-name-container button:hover {
+    background-color: rgb(231, 188, 109);
+
+    transform: scale(1.05);
+
+}
+.main-input-name-container button:active {
+    background-color: rgb(233, 162, 30);
+    
+    transform: scale(0.95);
+}
+
+/* ESTILOS DE LA PANTALLA DE BIENVENIDA */
+.welcome-screen {
+    opacity: 0;
+
+    font-size: 35px;
+}
+.welcome-screen.fade-in {
+    opacity: 1;
+
+    transition: opacity 1s ease-in;
+}
+.welcome-screen.fade-out {
+    opacity: 0;
+
+    transition: opacity 0.5s ease-in-out;
+}
+
+/* ESTILOS DE LA PANTALLA DE JUEGO DEL TRIVIA */
+.trivia-screen {
+    color: black;
+
+    width: 100%;
+}
+.trivia-screen p {
+    margin-top: 0px;
+
+    font-weight: bold;
+}
+
+.quiz-container {
+
+    width: 100vh;
+
+}
+
 .question-container {
+    background-color: rgb(255, 247, 214);
     border: 1px, solid, black;
 
-    width: 20%;
 
-    margin: 10px;
-    padding: 10px;
+    margin: 20px;
+    padding: 20px;
 }
 
 .answers-container {
@@ -21,4 +135,6 @@
     width: 150px;
 
     margin: 10px;
+
+    font-weight: bold;
 }

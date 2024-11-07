@@ -13,9 +13,42 @@
             - 1 boton para responder y ver cual es la respuesta correcta
             - no dice si aciertas o no, solo la respuesta correcta
     -->
-    <div id="quiz-container"></div>
 
-    <button id="btnCheckAnswers" class="check-button">COMPROBAR</button>
+    <!-- HITO 2
+            - Agregar una pantalla simple de bienvenida con los siguientes elementos y características
+                - Una caja de texto (input text) en la que escribe su nombre quien juega
+                - Un botón de "jugar" o "comenzar" para ir a las preguntas
+                - Esta vez deberán haber al menos 3 preguntas con sus respectivas alternativas de respuesta
+                - Antes de las preguntas debe decir "Hola [el nombre que se escribió en la pantalla de bienvenida]"
+                - El botón para responder muestra la alternativa correcta para cada pregunta y, además, muestra si 
+                  cada una de las respuestas fue correcta o incorrecta
+                - Un botón para volver a jugar que vuelva a la pantalla inicial en la que se pide el nombre
+    -->
+
+    <!-- PANTALLA DE INICIO -->
+    <div id="mainScreen" class="main-screen">
+      <h1 class="main-title">TRIVIA</h1>
+      <div class="main-input-name-container">
+        <input
+          id="txtPlayerName"
+          type="text"
+          placeholder="escribe tu nombre"
+          maxlength="10"
+        />
+        <button id="btnSetPlayerName">JUGAR</button>
+      </div>
+    </div>
+
+    <!-- PANTALLA DE BIENVENIDA -->
+    <div id="welcomeScreen" class="welcome-screen" style="display: none">
+      <h1 id="welcomeMessage">BIENVENIDO</h1>
+    </div>
+
+    <!-- PANTALLA DE JUEGO DEL TRIVIA -->
+    <div id="triviaScreen" class="trivia-screen" style="display: none">
+      <div id="quizContainer" class="quiz-container"></div>
+      <button id="btnCheckAnswers" class="check-button">COMPROBAR</button>
+    </div>
 
     <script src="app.js" defer></script>
   </body>

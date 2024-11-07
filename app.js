@@ -18,21 +18,38 @@ class Question
 //#endregion
 
 //#region CONST
+
+// Screens
+const mainScreen = document.getElementById("mainScreen");
+const welcomeScreen = document.getElementById("welcomeScreen");
+const triviaScreen = document.getElementById("triviaScreen");
+
 // Array para las preguntas del trivial
 const quests = [
     new Question("¿Qué Pokémon es tipo fuego?", ["Bulbasaur", "Squirtle", "Charmander", "Pikachu"], 2),
-    new Question("¿Qué Pokémon pertenece a la región de Sinnoh?", ["Zubat", "Poliwag", "Piplup", "Charmander"], 2)
+    new Question("¿Qué Pokémon pertenece a la región de Sinnoh?", ["Zubat", "Poliwag", "Piplup", "Charmander"], 2),
+    new Question("¿Qué Pokémon se puede tomar la forma de otros?", ["Mewtwo", "Snivy", "Eevee", "Ditto"], 3)
 ];
 
 // Este es el container base donde acoplare todas las preguntas
-const quizContainer = document.getElementById("quiz-container");
+const quizContainer = document.getElementById("quizContainer");
 
+//#endregion
+
+//#region LET
+let answersCorrect = 0;
+let answersIncorrect = 0;
+let unanswered = 0;
 //#endregion
 
 // Esta funcion me permite mantener la linea de ejecucion clara y limpia
 function InitialCall()
 {
     //#region INPUTS
+    const txtPlayerName = document.getElementById("txtPlayerName");
+    const btnSetPlayerName = document.getElementById("btnSetPlayerName");
+    
+    const welcomeMessage = document.getElementById("welcomeMessage");
 
     const btnCheckAnswers = document.getElementById("btnCheckAnswers");
     const rbtnAnswerList = document.querySelectorAll(".rbtnAnswer");
@@ -42,6 +59,8 @@ function InitialCall()
     // Aqui vinculo los inputs con sus funciones
     document.addEventListener("DOMContentLoaded", () =>
     {
+        btnSetPlayerName.addEventListener("click", startWelcome)
+
         btnCheckAnswers.addEventListener("click", checkAnswers);
         rbtnAnswerList.forEach(button => {
             button.addEventListener("click", displayAlert);
@@ -57,6 +76,49 @@ function InitialCall()
 }
 
 //#region FUNCTIONS
+let startWelcome = () =>
+{
+    console.log(txtPlayerName.value);
+
+    if (txtPlayerName.value) {
+        // Oculto la pantalla principal
+        mainScreen.classList.add("fade-out");
+
+        // Este time out es para controlar el fade-out de la pantalla principal
+        setTimeout(() => {
+            mainScreen.style.display = "none";
+
+            welcomeScreen.style.display = "flex";
+
+            // Este time out es para controlar la entrada de la pantalla de bienvenida
+            setTimeout(() => {
+                welcomeScreen.classList.add("fade-in");
+                welcomeMessage.textContent += " "+(txtPlayerName.value).toUpperCase();
+
+                // Este time out es para controlar el incio de la animacion de fade-out de la pantalla de bienvenida
+                setTimeout(() => {
+                    welcomeScreen.classList.add("fade-out");
+
+                    setTimeout(() => {
+                        welcomeScreen.style.display = "none";
+
+                        triviaScreen.style.display = "grid";
+                    }, 500);
+                }, 3000)
+
+            }, 500)
+        }, 500);
+
+        // Muestro la pantalla de bienvenida
+        
+
+    } else {
+        alert("Necesitas un nombre de usuario.")
+    }
+
+
+}
+
 // Esta funcion me permite generar las preguntas segun la cantidad de preguntas tenga en el array
 let generateQuestionnaire = () =>
 {
@@ -101,16 +163,38 @@ let checkAnswers = () =>
 {
     quests.forEach((quest, index) => {
         const answers = document.querySelectorAll(`input[name=question_${index}]`);
-        const selectedAnswer = Array.from(answers).find(answer => answer.checked)?.value;
+        const selectedAnswer = Array.from(answers).find(answer => answer.checked);
 
-        console.log(quest.isCorrectAnswer(Number(selectedAnswer)));
-        
+        if (selectedAnswer) 
+        {
+            selectedAnswer.style.accentColor = quest.isCorrectAnswer(Number(selectedAnswer?.value)) ? "green" : "red";
+            if (quest.isCorrectAnswer(Number(selectedAnswer?.value))) 
+                { 
+                    answersCorrect++; 
+                } else { 
+                    answersIncorrect++; 
+                }
+
+        } else {
+            unanswered++;
+        }
     });
+
+    displayResult();
 }
 
 let displayAlert = (event) =>
 {
     alert(event.target.name + " -- " + event.target.value);
+}
+
+let displayResult = () => 
+{
+    console.log("Correct answers", answersCorrect, "| Incorrect answers", answersIncorrect, "| Unanswered", unanswered);
+
+    answersCorrect = 0;
+    answersIncorrect = 0;
+    unanswered = 0;
 }
 
 //#endregion
