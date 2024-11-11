@@ -14,10 +14,42 @@ body, html {
 }
 
 body button {
+    background-color: wheat;
 
+    border: 3px, thin, rgb(255, 221, 147);
+    border-radius: 30px;
+
+    height: 65px;
+    padding: 0px 20px;
+
+    font-size: 30px;
+    font-weight: bold;
+
+    transition: background-color 0.3s;
+    transition: transform 0.5s;
+}
+body button:hover {
+    background-color: rgb(231, 188, 109);
+
+    transform: scale(1.05);
+}
+body button:active {
+    background-color: rgb(233, 162, 30);
+    
+    transform: scale(0.95);
 }
 
 /* ESTILOS DE LA PANTALLA DE INICIO */
+.main-screen {
+    display: flex;
+    flex-direction: column;
+
+}
+.main-screen.fade-in {
+    opacity: 1;
+
+    transition: opacity 1s ease;
+}
 .main-screen.fade-out {
     opacity: 0;
 
@@ -50,32 +82,6 @@ body button {
 
     text-overflow: ellipsis;
 }
-.main-input-name-container button {
-    background-color: wheat;
-
-    border: 3px, thin, rgb(255, 221, 147);
-    border-radius: 30px;
-
-    height: 65px;
-    width: 150px;
-
-    font-size: 30px;
-    font-weight: bold;
-
-    transition: background-color 0.3s;
-    transition: transform 0.5s;
-}
-.main-input-name-container button:hover {
-    background-color: rgb(231, 188, 109);
-
-    transform: scale(1.05);
-
-}
-.main-input-name-container button:active {
-    background-color: rgb(233, 162, 30);
-    
-    transform: scale(0.95);
-}
 
 /* ESTILOS DE LA PANTALLA DE BIENVENIDA */
 .welcome-screen {
@@ -94,8 +100,56 @@ body button {
     transition: opacity 0.5s ease-in-out;
 }
 
+/* ESTILOS DE LA PANTALLA DE SELECCION DE JUEGO */
+.game-selection-screen {
+    display: flex;
+    flex-direction: row;
+
+    background-color: green;
+
+    gap: 30px;
+}
+
+.game-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    border: 1px, solid, red;
+    border-radius: 20px;
+
+    background-color: wheat;
+
+    height: 55vh;
+    width: 15vw;
+
+    padding: 10px;
+    gap: 20px;
+
+
+}
+.game-block img {
+    background-color: red;
+
+    height: 45vh;
+    width: auto;
+
+    object-fit: cover;
+}
+.game-block button {
+
+    height: 70px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
 /* ESTILOS DE LA PANTALLA DE JUEGO DEL TRIVIA */
 .trivia-screen {
+    display: flex;
+    flex-direction: column;
+
     color: black;
 
     width: 100%;
@@ -126,15 +180,10 @@ body button {
     grid-template-columns: repeat(2, 1fr);
 }
 
-.check-button {
-    border: 1px, solid, black;
-    border-radius: 30px;
-    background-color: rgb(255, 239, 170);
+.trivia-button-container button{
+    font-size: 18px;
+}
 
-    height: 50px;
-    width: 150px;
-
-    margin: 10px;
-
-    font-weight: bold;
+.replay-button {
+    float: right;
 }

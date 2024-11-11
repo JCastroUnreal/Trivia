@@ -53,6 +53,7 @@ function InitialCall()
 
     const btnCheckAnswers = document.getElementById("btnCheckAnswers");
     const rbtnAnswerList = document.querySelectorAll(".rbtnAnswer");
+    const btnReplay = document.getElementById("btnReplay");
     
     //#endregion
 
@@ -65,9 +66,14 @@ function InitialCall()
         rbtnAnswerList.forEach(button => {
             button.addEventListener("click", displayAlert);
         });
+
+        btnReplay.addEventListener("click", replayGame);
     });
 
     //#region EXECUTION LINE
+
+    //mainScreen.style.display = "flex";
+    //mainScreen.classList.add("fade-in");
 
     generateQuestionnaire();
 
@@ -102,7 +108,7 @@ let startWelcome = () =>
                     setTimeout(() => {
                         welcomeScreen.style.display = "none";
 
-                        triviaScreen.style.display = "grid";
+                        triviaScreen.style.display = "flex";
                     }, 500);
                 }, 3000)
 
@@ -195,6 +201,26 @@ let displayResult = () =>
     answersCorrect = 0;
     answersIncorrect = 0;
     unanswered = 0;
+}
+
+let replayGame = () => 
+{
+    quests.forEach((quest, index) => {
+        const answers = document.querySelectorAll(`input[name=question_${index}]`);
+        const selectedAnswer = Array.from(answers).find(answer => answer.checked);
+
+        if (selectedAnswer)
+        {
+            selectedAnswer.checked = false;
+            selectedAnswer.style.accentColor = "";
+        }
+
+        triviaScreen.style.display = "none";
+
+        mainScreen.style.display = "flex";
+        mainScreen.classList.add("fade-in");
+
+    });
 }
 
 //#endregion

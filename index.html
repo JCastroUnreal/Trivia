@@ -25,8 +25,16 @@
                 - Un botón para volver a jugar que vuelva a la pantalla inicial en la que se pide el nombre
     -->
 
+    <!-- HITO 3 
+            - Permítele al usuario elegir entre 2 tipos de preguntas después e escribir su nombre y antes de ir a responder
+            - Agrefa un puntuaje a respuestas correctas e incorrectas y muestra un puntuaje total al final
+    -->
+
+    <!-- PANTALLA VISIBLE -->
+    <div id="visibleScreen"></div>
+
     <!-- PANTALLA DE INICIO -->
-    <div id="mainScreen" class="main-screen">
+    <div id="mainScreen" class="main-screen" style="display: none">
       <h1 class="main-title">TRIVIA</h1>
       <div class="main-input-name-container">
         <input
@@ -44,10 +52,25 @@
       <h1 id="welcomeMessage">BIENVENIDO</h1>
     </div>
 
+    <!-- PANTALLA DE SELECCION DE JUEGO -->
+    <div id="gameSelectionScreen" class="game-selection-screen">
+      <div class="game-block">
+        <img src="resources/pikachu.png" />
+        <button>POKEMON</button>
+      </div>
+      <div class="game-block">
+        <img src="resources/temtem.png" />
+        <button>TEMTEM</button>
+      </div>
+    </div>
+
     <!-- PANTALLA DE JUEGO DEL TRIVIA -->
     <div id="triviaScreen" class="trivia-screen" style="display: none">
       <div id="quizContainer" class="quiz-container"></div>
-      <button id="btnCheckAnswers" class="check-button">COMPROBAR</button>
+      <div class="trivia-button-container">
+        <button id="btnCheckAnswers" class="check-button">COMPROBAR</button>
+        <button id="btnReplay" class="replay-button">VOLVER A JUGAR</button>
+      </div>
     </div>
 
     <script src="app.js" defer></script>
