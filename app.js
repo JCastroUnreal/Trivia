@@ -22,14 +22,19 @@ class Question
 // Screens
 const mainScreen = document.getElementById("mainScreen");
 const welcomeScreen = document.getElementById("welcomeScreen");
+const gameSelectionScreen = document.getElementById("gameSelectionScreen");
 const triviaScreen = document.getElementById("triviaScreen");
 
 // Array para las preguntas del trivial
-const quests = [
+const questsPokemon = [
     new Question("¿Qué Pokémon es tipo fuego?", ["Bulbasaur", "Squirtle", "Charmander", "Pikachu"], 2),
     new Question("¿Qué Pokémon pertenece a la región de Sinnoh?", ["Zubat", "Poliwag", "Piplup", "Charmander"], 2),
     new Question("¿Qué Pokémon se puede tomar la forma de otros?", ["Mewtwo", "Snivy", "Eevee", "Ditto"], 3)
 ];
+
+const questTemtem = [
+    new Question("¿Cual de estos tipos de elemento no existe en Temtem?", ["Cristal", "Digital", "Mental", "Oscuridad"], 3)
+]
 
 // Este es el container base donde acoplare todas las preguntas
 const quizContainer = document.getElementById("quizContainer");
@@ -37,6 +42,8 @@ const quizContainer = document.getElementById("quizContainer");
 //#endregion
 
 //#region LET
+let triviaQuestsListSelected;
+
 let answersCorrect = 0;
 let answersIncorrect = 0;
 let unanswered = 0;
@@ -51,6 +58,9 @@ function InitialCall()
     
     const welcomeMessage = document.getElementById("welcomeMessage");
 
+    const btnPokemonGameSelected = document.getElementById("btnPokemonGameSelected");
+    const btnTemtemGameSelected = document.getElementById("btnTemtemGameSelected");
+
     const btnCheckAnswers = document.getElementById("btnCheckAnswers");
     const rbtnAnswerList = document.querySelectorAll(".rbtnAnswer");
     const btnReplay = document.getElementById("btnReplay");
@@ -60,7 +70,11 @@ function InitialCall()
     // Aqui vinculo los inputs con sus funciones
     document.addEventListener("DOMContentLoaded", () =>
     {
-        btnSetPlayerName.addEventListener("click", startWelcome)
+        btnSetPlayerName.addEventListener("click", startWelcome);
+
+        btnPokemonGameSelected.addEventListener("click", selectGame("Pokemon"));
+        btnTemtemGameSelected.addEventListener("click", selectGame("Temtem"));
+
 
         btnCheckAnswers.addEventListener("click", checkAnswers);
         rbtnAnswerList.forEach(button => {
@@ -75,7 +89,7 @@ function InitialCall()
     //mainScreen.style.display = "flex";
     //mainScreen.classList.add("fade-in");
 
-    generateQuestionnaire();
+    //generateQuestionnaire();
 
     //#endregion
 
@@ -108,7 +122,7 @@ let startWelcome = () =>
                     setTimeout(() => {
                         welcomeScreen.style.display = "none";
 
-                        triviaScreen.style.display = "flex";
+                        gameSelectionScreen.style.display = "flex";
                     }, 500);
                 }, 3000)
 
@@ -125,10 +139,25 @@ let startWelcome = () =>
 
 }
 
-// Esta funcion me permite generar las preguntas segun la cantidad de preguntas tenga en el array
-let generateQuestionnaire = () =>
+// Esta funcion me permite seleccionar el array de preguntas que usare en la pantalla de juego de trivia
+let selectGame = (gameSelected) => 
 {
-    quests.forEach((quest, index) => {
+    console.log(gameSelected);
+
+    switch (gameSelected) {
+        case "Pokemon": triviaQuestsListSelected = questsPokemon;
+            break;
+        case "Temtem": triviaQuestsListSelected = questTemtem;
+            break;
+    }
+
+    generateQuestionnaire(triviaQuestsListSelected);
+}
+
+// Esta funcion me permite generar las preguntas segun la cantidad de preguntas tenga en el array
+let generateQuestionnaire = (questArray) =>
+{
+    questArray.forEach((quest, index) => {
         // Creo el contenedor
         const questionContainer = document.createElement("div");
         questionContainer.classList.add("question-container");
@@ -165,9 +194,10 @@ let generateQuestionnaire = () =>
     });
 }
 
+// Esta funcion me permite revisar las preguntas y saber si es correcta o incorrecta
 let checkAnswers = () =>
 {
-    quests.forEach((quest, index) => {
+    triviaQuestsListSelected.forEach((quest, index) => {
         const answers = document.querySelectorAll(`input[name=question_${index}]`);
         const selectedAnswer = Array.from(answers).find(answer => answer.checked);
 
@@ -205,7 +235,7 @@ let displayResult = () =>
 
 let replayGame = () => 
 {
-    quests.forEach((quest, index) => {
+    triviaQuestsListSelected.forEach((quest, index) => {
         const answers = document.querySelectorAll(`input[name=question_${index}]`);
         const selectedAnswer = Array.from(answers).find(answer => answer.checked);
 

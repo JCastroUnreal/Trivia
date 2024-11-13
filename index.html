@@ -34,7 +34,7 @@
     <div id="visibleScreen"></div>
 
     <!-- PANTALLA DE INICIO -->
-    <div id="mainScreen" class="main-screen" style="display: none">
+    <div id="mainScreen" class="main-screen">
       <h1 class="main-title">TRIVIA</h1>
       <div class="main-input-name-container">
         <input
@@ -53,14 +53,22 @@
     </div>
 
     <!-- PANTALLA DE SELECCION DE JUEGO -->
-    <div id="gameSelectionScreen" class="game-selection-screen">
-      <div class="game-block">
-        <img src="resources/pikachu.png" />
-        <button>POKEMON</button>
+    <div
+      id="gameSelectionScreen"
+      class="game-selection-screen"
+      style="display: none"
+    >
+      <div class="game-block-container">
+        <div class="game-block">
+          <img src="resources/pikachu 300x500.png" />
+          <button id="btnPokemonGameSelected">POKEMON</button>
+        </div>
       </div>
-      <div class="game-block">
-        <img src="resources/temtem.png" />
-        <button>TEMTEM</button>
+      <div class="game-block-container">
+        <div class="game-block">
+          <img src="resources/temtem 300x500.png" />
+          <button id="btnTemtemGameSelected">TEMTEM</button>
+        </div>
       </div>
     </div>
 
