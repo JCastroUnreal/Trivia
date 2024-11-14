@@ -133,7 +133,7 @@ body button:active {
     background-color: rgb(228, 212, 184);
 
     width: 225px;
-    height: 385px;
+    height: auto;
     min-width: 225px;
     min-height: 385px;
 
@@ -157,7 +157,7 @@ body button:active {
     text-overflow: ellipsis;
 }
 
-@media (max-width: 320px){
+@media (max-width: 385px){
     .game-selection-screen {
         flex-direction: column;
     }

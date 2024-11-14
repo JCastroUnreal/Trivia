@@ -42,6 +42,8 @@ const quizContainer = document.getElementById("quizContainer");
 //#endregion
 
 //#region LET
+let playerName;
+
 let triviaQuestsListSelected;
 
 let answersCorrect = 0;
@@ -72,8 +74,8 @@ function InitialCall()
     {
         btnSetPlayerName.addEventListener("click", startWelcome);
 
-        btnPokemonGameSelected.addEventListener("click", selectGame("Pokemon"));
-        btnTemtemGameSelected.addEventListener("click", selectGame("Temtem"));
+        btnPokemonGameSelected.addEventListener("click", () => selectGame("Pokemon"));
+        btnTemtemGameSelected.addEventListener("click", () => selectGame("Temtem"));
 
 
         btnCheckAnswers.addEventListener("click", checkAnswers);
@@ -98,9 +100,10 @@ function InitialCall()
 //#region FUNCTIONS
 let startWelcome = () =>
 {
-    console.log(txtPlayerName.value);
+    playerName = txtPlayerName.value;
+    console.log(playerName);
 
-    if (txtPlayerName.value) {
+    if (playerName) {
         // Oculto la pantalla principal
         mainScreen.classList.add("fade-out");
 
@@ -113,17 +116,19 @@ let startWelcome = () =>
             // Este time out es para controlar la entrada de la pantalla de bienvenida
             setTimeout(() => {
                 welcomeScreen.classList.add("fade-in");
-                welcomeMessage.textContent += " "+(txtPlayerName.value).toUpperCase();
+                welcomeMessage.textContent += " "+(playerName).toUpperCase();
 
                 // Este time out es para controlar el incio de la animacion de fade-out de la pantalla de bienvenida
                 setTimeout(() => {
+                    welcomeScreen.classList.remove("fade-in");
+
                     welcomeScreen.classList.add("fade-out");
 
                     setTimeout(() => {
                         welcomeScreen.style.display = "none";
 
                         gameSelectionScreen.style.display = "flex";
-                    }, 500);
+                    }, 1000);
                 }, 3000)
 
             }, 500)
@@ -151,13 +156,16 @@ let selectGame = (gameSelected) =>
             break;
     }
 
-    generateQuestionnaire(triviaQuestsListSelected);
+    generateQuestionnaire();
+
+    gameSelectionScreen.style.display = "none";
+    triviaScreen.style.display = "flex";
 }
 
 // Esta funcion me permite generar las preguntas segun la cantidad de preguntas tenga en el array
-let generateQuestionnaire = (questArray) =>
+let generateQuestionnaire = () =>
 {
-    questArray.forEach((quest, index) => {
+    triviaQuestsListSelected.forEach((quest, index) => {
         // Creo el contenedor
         const questionContainer = document.createElement("div");
         questionContainer.classList.add("question-container");
@@ -233,6 +241,7 @@ let displayResult = () =>
     unanswered = 0;
 }
 
+// Esta es la funcion que reinicia el juego
 let replayGame = () => 
 {
     triviaQuestsListSelected.forEach((quest, index) => {
@@ -248,8 +257,17 @@ let replayGame = () =>
         triviaScreen.style.display = "none";
 
         mainScreen.style.display = "flex";
-        mainScreen.classList.add("fade-in");
 
+        // Limpio los estilos y variables necesarios para el reinicio
+        mainScreen.classList.remove("fade-out");
+        welcomeScreen.classList.remove("fade-out");
+        welcomeMessage.textContent = "BIENVENIDO";
+        playerName = "";
+        triviaQuestsListSelected = [];
+        quizContainer.replaceChildren();
+
+        
+        
     });
 }
 
